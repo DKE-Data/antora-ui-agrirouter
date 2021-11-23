@@ -32,14 +32,22 @@ jobs:
         if: ${{ contains(github.ref, 'refs/heads/') }}
         run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: ui-bundle-${{ env.BRANCH_NAME }}
-#          path: |
-#            build/ui-bundle.zip
-      - uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/ui-bundle.zip"
-          tag: ${{ env.BRANCH_NAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: determine target path
+        run: |
+          echo "GITHUB_REF is $GITHUB_REF";
+          echo "PR number is ${{ github.event.number }}";
+          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+            TARGET_PATH=
+          else
+            TARGET_PATH=_branches/pr/${{ github.event.number }}
+          fi
+          echo "target_path=/var/www/web25462234/html/docs.my-agrirouter.com/$TARGET_PATH" >> $GITHUB_ENV;
+          echo "target_url=https://docs.my-agrirouter.com/$TARGET_PATH" >> $GITHUB_ENV;
+          grep target_path $GITHUB_ENV;
+          grep target_url $GITHUB_ENV;
+
+      # very unelegant, but hoster does not support SSH key authentication :-/
+      - name: Copy artifact to Webspace
+        run: |
+          sshpass -p ${{secrets.SSH_PASSWORD}} scp build/ui-bundle.zip ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOSTNAME}}:/var/www/web25462234/html/files.my-agrirouter.com/ui-bundle-${{ env.BRANCH_NAME }}.zip
