@@ -1,11 +1,11 @@
 {
-  "name": "@antora/ui-default",
-  "description": "An archetype project that produces a UI for creating documentation sites with Antora",
-  "homepage": "https://gitlab.com/antora/antora-ui-default",
-  "license": "MPL-2.0",
+  "name": "antora-ui-agrirouter",
+  "description": "An antora UI project that builds the UI bundles used by the agrirouter docs sites, based on the antora-ui-default project",
+  "homepage": "https://github.com/dke-data/antora-ui-agrirouter",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/antora/antora-ui-default.git"
+    "url": "https://github.com/dke-data/antora-ui-agrirouter.git"
   },
   "engines": {
     "node": ">= 8.0.0"
