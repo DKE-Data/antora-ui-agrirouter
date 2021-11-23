@@ -1,0 +1,40 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - release
+  pull_request:
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node
+        id: node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: |
+          gulp bundle
+
+      - name: Get branch name
+        if: ${{ contains(github.ref, 'refs/heads/') }}
+        run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ui-bundle-${{ env.BRANCH_NAME }}
+          path: |
+            build/ui-bundle.zip
