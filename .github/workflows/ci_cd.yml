@@ -30,7 +30,7 @@ jobs:
 
       - name: Get branch name
         if: ${{ contains(github.ref, 'refs/heads/') }}
-        run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
