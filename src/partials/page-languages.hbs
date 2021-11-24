@@ -1,0 +1,12 @@
+{{#if env.ANTORA_LANGUAGE}}
+<div class="page-languages">
+  <button class="language-menu-toggle" title="Show other languages of the site">&#127760; {{env.ANTORA_LANGUAGE}}</button>
+  <div class="language-menu">
+    <a class="language" href="{{siteRootPath}}/../de{{page.url}}">Deutsch</a>
+    <a class="language" href="{{siteRootPath}}/../en{{page.url}}">English</a>
+    <a class="language" href="{{siteRootPath}}/../fr{{page.url}}">Francais</a>
+    <a class="language" href="{{siteRootPath}}/../it{{page.url}}">Italiano</a>
+    <a class="language" href="{{siteRootPath}}/../ru{{page.url}}">русский</a>
+  </div>
+</div>
+{{/if}}
