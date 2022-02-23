@@ -6,7 +6,8 @@
       {{#if env.SITE_SEARCH_PROVIDER}}
       <div class="navbar-item search hide-for-print">
         <div id="search-field" class="field">
-          <input id="search-input" type="text" placeholder="Search docs" {{#if page.home}} autofocus{{/if}}>
+          <input id="search-input" type="text" placeholder="{{or page.attributes.search-note 'Search docs'}}"
+            {{#if page.home}} autofocus{{/if}}>
         </div>
       </div>
       {{/if}}
@@ -16,24 +17,6 @@
         <span></span>
       </button>
     </div>
-    <div id="topbar-nav" class="navbar-menu">
-      <div class="navbar-end">
-        <!--a class="navbar-item" href="#">Home</a-->
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">Resources</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://github.com/dke-data">Github</a>
-            <a class="navbar-item" href="https://my-agrirouter.com">Website</a>
-            <a class="navbar-item" href="https://goto.my-agrirouter.com">agrirouter Production</a>
-            <a class="navbar-item" href="https://qa.my-agrirouter.com">agrirouter QA</a>
-          </div>
-        </div>
-        <div class="navbar-item">
-          <span class="control">
-            <a class="button is-primary" href="https://github.com/dke-data">Github</a>
-          </span>
-        </div>
-      </div>
-    </div>
+    {{> header-menu}}
   </nav>
 </header>

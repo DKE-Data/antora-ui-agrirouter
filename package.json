@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/dke-data/antora-ui-agrirouter.git"
   },
+  "scripts": {
+    "bundle": "node_modules/.bin/gulp bundle"
+  },
   "engines": {
     "node": ">= 8.0.0"
   },
