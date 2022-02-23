@@ -1,7 +1,11 @@
 <footer class="footer">
   <p>
-    <a href="https://my-agrirouter.com/en/footer/privacy-policy/">Privacy Policy</a> |
-    <a href="https://my-agrirouter.com/en/footer/legal-notice/">Legal Notice</a> |
+    <a href="https://my-agrirouter.com/en/footer/privacy-policy/">
+      {{or page.attributes.privacy-policy 'Privacy Policy'}}
+    </a> |
+    <a href="https://my-agrirouter.com/en/footer/legal-notice/">
+      {{or page.attributes.legal-notice 'Legal Notice'}}
+    </a> |
     &copy; 2022 DKE-Data GmbH &amp; Co. KG
   </p>
 </footer>
