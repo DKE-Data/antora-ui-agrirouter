@@ -56,5 +56,9 @@
     "typeface-roboto-mono": "0.0.75",
     "vinyl-buffer": "~1.0",
     "vinyl-fs": "~3.0"
+  },
+  "dependencies": {
+    "@antora/lunr-extension": "^1.0.0-alpha.5",
+    "eslint-plugin-prettier": "^4.0.0"
   }
 }

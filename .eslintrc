@@ -1,5 +1,5 @@
 {
-  "extends": "standard",
+  "extends": ["standard"],
   "rules": {
     "arrow-parens": ["error", "always"],
     "comma-dangle": ["error", {
@@ -9,6 +9,7 @@
       "exports": "always-multiline"
     }],
     "max-len": [1, 120, 2],
-    "spaced-comment": "off"
+    "spaced-comment": "off",
+    "space-before-function-paren": "off"
   }
 }
