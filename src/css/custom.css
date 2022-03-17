@@ -1,6 +1,7 @@
 span.result::before {
   content: '⇒ ';
 }
+
 span.result {
   display: block;
   margin-left: 1rem;
