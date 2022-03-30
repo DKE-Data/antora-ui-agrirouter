@@ -1,6 +1,5 @@
-/* eslint-env browser */
-/* global CustomEvent globalThis */
-;(function(globalScope) {
+/* global CustomEvent */
+;(function (globalScope) {
   /* eslint-disable no-var */
   var config = document.getElementById('search-ui-script').dataset
   var snippetLength = parseInt(config.snippetLength || 100, 10)
@@ -58,7 +57,7 @@
     return hits
   }
 
-  function highlightTitle(hash, doc, position) {
+  function highlightTitle(sectionTitle, doc, position) {
     var hits = []
     var start = position[0]
     var length = position[1]
@@ -66,10 +65,8 @@
     var highlightSpan = document.createElement('span')
     highlightSpan.classList.add('search-result-highlight')
     var title
-    if (hash) {
-      title = doc.titles.filter(function(item) {
-        return item.id === hash
-      })[0].text
+    if (sectionTitle) {
+      title = sectionTitle.text
     } else {
       title = doc.title
     }
@@ -93,7 +90,7 @@
     return hits
   }
 
-  function highlightHit(metadata, hash, doc) {
+  function highlightHit(metadata, sectionTitle, doc) {
     var hits = []
     for (var token in metadata) {
       var fields = metadata[token]
@@ -102,7 +99,7 @@
         if (positions.position) {
           var position = positions.position[0] // only higlight the first match
           if (field === 'title') {
-            hits = highlightTitle(hash, doc, position)
+            hits = highlightTitle(sectionTitle, doc, position)
           } else if (field === 'text') {
             hits = highlightText(doc, position)
           }
@@ -113,37 +110,43 @@
   }
 
   function createSearchResult(result, store, searchResultDataset) {
-    result.forEach(function(item) {
-      var doc = store[item.ref]
-      var url = doc.url
-      var hash
-      if (url.includes('#')) {
-        hash = url.substring(url.indexOf('#') + 1)
-        url = url.replace('#' + hash, '')
+    result.forEach(function (item) {
+      var ids = item.ref.split('-')
+      var docId = ids[0]
+      var doc = store[docId]
+      var sectionTitle
+      if (ids.length > 1) {
+        var titleId = ids[1]
+        sectionTitle = doc.titles.filter(function (item) {
+          return String(item.id) === titleId
+        })[0]
       }
       var metadata = item.matchData.metadata
-      var hits = highlightHit(metadata, hash, doc)
-      searchResultDataset.appendChild(createSearchResultItem(doc, item, hits))
+      var hits = highlightHit(metadata, sectionTitle, doc)
+      searchResultDataset.appendChild(
+        createSearchResultItem(doc, sectionTitle, item, hits)
+      )
     })
   }
 
-  function createSearchResultItem(doc, item, hits) {
+  function createSearchResultItem(doc, sectionTitle, item, hits) {
     var documentTitle = document.createElement('div')
     documentTitle.classList.add('search-result-document-title')
     documentTitle.innerText = doc.title
     var documentHit = document.createElement('div')
     documentHit.classList.add('search-result-document-hit')
     var documentHitLink = document.createElement('a')
-    documentHitLink.href = siteRootPath + doc.url
+    documentHitLink.href =
+      siteRootPath + doc.url + (sectionTitle ? '#' + sectionTitle.hash : '')
     documentHit.appendChild(documentHitLink)
-    hits.forEach(function(hit) {
+    hits.forEach(function (hit) {
       documentHitLink.appendChild(hit)
     })
     var searchResultItem = document.createElement('div')
     searchResultItem.classList.add('search-result-item')
     searchResultItem.appendChild(documentTitle)
     searchResultItem.appendChild(documentHit)
-    searchResultItem.addEventListener('mousedown', function(e) {
+    searchResultItem.addEventListener('mousedown', function (e) {
       e.preventDefault()
     })
     return searchResultItem
@@ -204,10 +207,10 @@
 
   function debounce(func, wait, immediate) {
     var timeout
-    return function() {
+    return function () {
       var context = this
       var args = arguments
-      var later = function() {
+      var later = function () {
         timeout = null
         if (!immediate) func.apply(context, args)
       }
@@ -242,20 +245,18 @@
       new URLSearchParams(globalScope.location.search).has('lunr-debug')
     searchInput.addEventListener(
       'keydown',
-      debounce(function(e) {
-        if (e.key === 'Escape' || e.key === 'Esc') {
+      debounce(function (e) {
+        if (e.key === 'Escape' || e.key === 'Esc')
           return clearSearchResults(true)
-        }
         try {
           var query = searchInput.value
           if (!query) return clearSearchResults()
           searchIndex(index.index, index.store, searchInput.value)
         } catch (err) {
-          if (debug) {
+          if (debug)
             console.debug(
               'Invalid search query: ' + query + ' (' + err.message + ')'
             )
-          }
         }
       }, 100)
     )
