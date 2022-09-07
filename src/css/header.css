@@ -323,8 +323,3 @@ body {
     background: var(--navbar-menu_hover-background);
   }
 }
-
-#logo {
-  height: 50px;
-  padding-right: 10px;
-}

@@ -6,3 +6,8 @@ span.result {
   display: block;
   margin-left: 1rem;
 }
+
+#logo {
+  height: 50px;
+  padding-right: 10px;
+}
