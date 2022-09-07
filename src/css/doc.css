@@ -96,7 +96,7 @@
 .doc h4 .anchor::before,
 .doc h5 .anchor::before,
 .doc h6 .anchor::before {
-  content: "\00a7";
+  content: '\00a7';
 }
 
 .doc h1:hover .anchor,
@@ -161,6 +161,30 @@
 
 .doc .paragraph.lead > p {
   font-size: calc(18 / var(--rem-base) * 1rem);
+}
+
+.doc .right {
+  float: right;
+  margin-right: 1rem;
+}
+
+.doc .left {
+  float: left;
+  margin-right: 1rem;
+}
+
+.doc .float-gap.right {
+  margin: 0 1rem 1rem 0;
+}
+
+.doc .float-gap.left {
+  margin: 0 0 1rem 1rem;
+}
+
+.doc .float-group::after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 .doc .stretch {
@@ -378,9 +402,9 @@
   color: var(--warning-on-color);
 }
 
-i.fa[class^="icon-"],
-i.fa[class*=" icon-"]::before {
-  content: "";
+i.fa[class^='icon-'],
+i.fa[class*=' icon-']::before {
+  content: '';
   height: 1.25rem;
   width: 1.25rem;
   margin-right: 0.25rem;
@@ -388,23 +412,23 @@ i.fa[class*=" icon-"]::before {
 }
 
 i.fa.icon-note::before {
-  background: no-repeat url("../img/note.svg");
+  background: no-repeat url('../img/note.svg');
 }
 
 i.fa.icon-tip::before {
-  background: no-repeat url("../img/tip.svg");
+  background: no-repeat url('../img/tip.svg');
 }
 
 i.fa.icon-important::before {
-  background: no-repeat url("../img/important.svg");
+  background: no-repeat url('../img/important.svg');
 }
 
 i.fa.icon-warning::before {
-  background: no-repeat url("../img/warning.svg");
+  background: no-repeat url('../img/warning.svg');
 }
 
 i.fa.icon-caution::before {
-  background: no-repeat url("../img/caution.svg");
+  background: no-repeat url('../img/caution.svg');
 }
 
 .doc .admonitionblock .icon i {
@@ -422,6 +446,16 @@ i.fa.icon-caution::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.doc .imageblock.text-left,
+.doc .videoblock.text-left {
+  align-items: flex-start;
+}
+
+.doc .imageblock.text-right,
+.doc .videoblock.text-right {
+  align-items: flex-end;
 }
 
 .doc .imageblock img,
@@ -559,7 +593,7 @@ i.fa.icon-caution::before {
 }
 
 .doc ul.checklist {
-  padding-left: 0.5rem;
+  padding-left: 1.75rem;
 }
 
 .doc ul.checklist p > i.fa-check-square-o:first-child,
@@ -567,14 +601,15 @@ i.fa.icon-caution::before {
   display: inline-flex;
   justify-content: center;
   width: 1.25rem;
+  margin-left: -1.25rem;
 }
 
 .doc ul.checklist i.fa-check-square-o::before {
-  content: "\2713";
+  content: '\2713';
 }
 
 .doc ul.checklist i.fa-square-o::before {
-  content: "\274f";
+  content: '\274f';
 }
 
 .doc .dlist .dlist,
@@ -639,7 +674,7 @@ i.fa.icon-caution::before {
 }
 
 .doc details > summary::before {
-  content: "";
+  content: '';
   border: solid transparent;
   border-left-color: currentColor;
   border-width: 0.3em 0 0.3em 0.5em;
@@ -656,7 +691,7 @@ i.fa.icon-caution::before {
 }
 
 .doc details > summary::after {
-  content: "";
+  content: '';
   width: 1rem;
   height: 1em;
   position: absolute;
@@ -688,7 +723,7 @@ i.fa.icon-caution::before {
 
 .doc .exampleblock > .content::after,
 .doc details.result > .content::after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -760,7 +795,7 @@ i.fa.icon-caution::before {
 }
 
 .doc .source-toolbox > :not(:last-child)::after {
-  content: "|";
+  content: '|';
   letter-spacing: 0;
   padding: 0 1ch;
 }
@@ -810,7 +845,7 @@ i.fa.icon-caution::before {
 }
 
 .doc .source-toolbox .copy-toast::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   width: 1em;
@@ -836,16 +871,6 @@ i.fa.icon-caution::before {
 
 .doc .dlist dd {
   margin: 0 0 0.25rem 1.5rem;
-}
-
-.doc .right {
-  float: right;
-  margin-left: 1rem;
-}
-
-.doc .left {
-  float: left;
-  margin-right: 1rem;
 }
 
 .doc .float-group {
@@ -926,12 +951,12 @@ i.fa.icon-caution::before {
 }
 
 .doc b.button::before {
-  content: "[";
+  content: '[';
   padding-right: 0.25em;
 }
 
 .doc b.button::after {
-  content: "]";
+  content: ']';
   padding-left: 0.25em;
 }
 
@@ -941,7 +966,8 @@ i.fa.icon-caution::before {
   background: var(--kbd-background);
   border: 1px solid var(--kbd-border-color);
   border-radius: 0.25em;
-  box-shadow: 0 1px 0 var(--kbd-border-color), 0 0 0 0.1em var(--body-background) inset;
+  box-shadow: 0 1px 0 var(--kbd-border-color),
+    0 0 0 0.1em var(--body-background) inset;
   padding: 0.25em 0.5em;
   vertical-align: text-bottom;
   white-space: nowrap; /* effectively ignores hyphens setting */
@@ -974,7 +1000,7 @@ i.fa.icon-caution::before {
 }
 
 .doc .menuseq i.caret::before {
-  content: "\203a";
+  content: '\203a';
   font-size: 1.1em;
   font-weight: var(--body-font-weight-bold);
   line-height: calc(1 / 1.1);
