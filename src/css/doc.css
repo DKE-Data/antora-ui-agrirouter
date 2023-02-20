@@ -165,10 +165,12 @@
 
 .doc .right {
   float: right;
+  margin-left: 1rem;
 }
 
 .doc .left {
   float: left;
+  margin-right: 1rem;
 }
 
 .doc .float-gap.right {
@@ -888,16 +890,6 @@ i.fa.icon-caution::before {
 
 .doc .dlist dd {
   margin: 0 0 0.25rem 1.5rem;
-}
-
-.doc .right {
-  float: right;
-  margin-left: 1rem;
-}
-
-.doc .left {
-  float: left;
-  margin-right: 1rem;
 }
 
 .doc .float-group {
