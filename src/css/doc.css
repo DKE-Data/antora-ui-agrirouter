@@ -170,7 +170,17 @@
 
 .doc .left {
   float: left;
-  margin-right: 1rem;
+  /*  margin-right: 1rem; */
+}
+
+@media screen and (max-width: 768px) {
+  .doc .right {
+    float: none;
+  }
+
+  .doc .left {
+    float: none;
+  }
 }
 
 .doc .float-gap.right {
